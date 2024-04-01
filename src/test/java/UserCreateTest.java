@@ -18,26 +18,20 @@ public class UserCreateTest {
     @Test
     @DisplayName("User creation")
     public void userCreate() {
-        //StepMethods stepMethods = new StepMethods();
         Response creationUserResponse = stepMethods.creationUser();
 
         creationUserResponse.then().assertThat().body("success", equalTo(true));
 
         stepMethods.loginUser().then().assertThat().body("success", equalTo(true));
-
-        //stepMethods.deleteUser().then().assertThat().body("success", equalTo(true));
     }
 
     @Test
     @DisplayName("User already created")
     public void  userAlreadyCreated() {
-        //StepMethods stepMethods = new StepMethods();
         stepMethods.creationUser();
         Response userAlreadyCreatedResponse = stepMethods.creationUser();
 
         userAlreadyCreatedResponse.then().statusCode(403).assertThat().body("success", equalTo(false));
-
-        //stepMethods.deleteUser().then().assertThat().body("success", equalTo(true));
     }
 
     @Test
